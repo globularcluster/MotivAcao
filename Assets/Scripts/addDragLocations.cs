@@ -10,9 +10,14 @@ public class addDragLocations : MonoBehaviour
 
 	void Start ()
 	{
-		GameObject panel = (GameObject)Instantiate (panelPrefab);
+		GameObject panel = (GameObject)Instantiate (panelPrefab, new Vector3 (150, 150), Quaternion.Euler (0, 0, 0));
 		GameObject image = (GameObject)Instantiate (imagePrefab);
-		image.GetComponent<Image> ().rectTransform.sizeDelta = new Vector2 (150, 100);
+		image.GetComponent<Image> ().rectTransform.sizeDelta = new Vector2 (150, 150);
+
+		// deixando a imagem transparente
+		Color c = image.GetComponent<Image> ().color;
+		c.a = 0;
+		image.GetComponent<Image> ().color = c;
 
 		image.transform.SetParent (panel.transform);
 		panel.transform.SetParent (imagemBG);

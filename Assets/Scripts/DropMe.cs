@@ -21,13 +21,13 @@ public class DropMe : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
 		if (receivingImage == null)
 			return;
 
-		Color c = receivingImage.color;
-		c.a = 255;
-		receivingImage.color = c;
-		
 		Sprite dropSprite = GetDropSprite (data);
 		if (dropSprite != null)
 			receivingImage.overrideSprite = dropSprite;
+
+		Color c = receivingImage.color;
+		c.a = 255;
+		receivingImage.color = c;
 	}
 
 	public void OnPointerEnter (PointerEventData data)

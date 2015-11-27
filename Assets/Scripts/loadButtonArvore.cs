@@ -7,12 +7,14 @@ public class loadButtonArvore : MonoBehaviour
 {
 
 	private Button b;
-	private bool openMenu;
+	public bool openMenu;
 	public GameObject menu;
 	public Transform menuContent;
-	string[] elementsPath;
+	private string[] elementsPath;
+	private Texture2D[] elementsVector;
 
 	public GameObject imagePrefabs;
+	public GameObject panelPregabs;
 
 	// Use this for initialization
 	void Start ()
@@ -32,16 +34,16 @@ public class loadButtonArvore : MonoBehaviour
 		string path = System.IO.Directory.GetCurrentDirectory () + @"\Imagens\ComEdicao\" + loadMenuButtons.imagemEDITAR + @"EDITADA\";
 
 		elementsPath = Directory.GetFiles (path, "*");
-		Texture2D[] elementsVector = new Texture2D[elementsPath.Length];
+		elementsVector = new Texture2D[elementsPath.Length];
 
 		for (int i=0; i<elementsPath.Length; i++) {
 
-//			GameObject button = (GameObject)Instantiate (buttonPrefabs);
+			GameObject panel = (GameObject)Instantiate (panelPregabs);
 			GameObject button = (GameObject)Instantiate (imagePrefabs);
-			button.transform.SetParent (menuContent, false);
+			button.transform.SetParent (panel.transform, false);
+			panel.transform.SetParent (menuContent, false);
+		
 			button.AddComponent<DragMe> ();
-
-			Image img = button.GetComponent<Image> ();
 
 			// carrega a imagem em uma textura2d e adiciona no botao
 			string pathTemp = @"file://" + elementsPath [i];
@@ -50,8 +52,9 @@ public class loadButtonArvore : MonoBehaviour
 			www.LoadImageIntoTexture (texTmp);
 			Sprite sprite = Sprite.Create (texTmp, new Rect (0, 0, texTmp.width, texTmp.height), new Vector2 (.5f, .5f));
 			elementsVector [i] = texTmp;
-			
-			img.overrideSprite = sprite;
+
+			Image img = button.GetComponent<Image> ();
+			img.sprite = sprite;
 			
 //			but.onClick.AddListener ();
 
@@ -64,5 +67,10 @@ public class loadButtonArvore : MonoBehaviour
 	{
 		menu.SetActive (openMenu);
 
+	}
+
+	public void CloseMenu ()
+	{
+		menu.SetActive (false);
 	}
 }

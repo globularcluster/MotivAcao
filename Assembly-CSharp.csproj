@@ -6,7 +6,7 @@
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
 	<RootNamespace></RootNamespace>
-	<ProjectGuid>{C4EE1A09-7286-1954-B59C-A4B6F97D4C47}</ProjectGuid>
+	<ProjectGuid>{25D41D7A-9304-6A3A-0313-2116FA38975F}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<AssemblyName>Assembly-CSharp</AssemblyName>
@@ -51,17 +51,11 @@
      <Compile Include="Assets\Scripts\loadButtonArvore.cs" />
      <Compile Include="Assets\Scripts\loadImagensEdicao.cs" />
      <Compile Include="Assets\Scripts\loadMenuButtons.cs" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>B:/Arquivos de Programas/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>B:/Arquivos de Programas/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>B:/Arquivos de Programas/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>B:/Arquivos de Programas/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>B:/Arquivos de Programas/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
