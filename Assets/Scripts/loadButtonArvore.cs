@@ -40,10 +40,9 @@ public class loadButtonArvore : MonoBehaviour
 
 			GameObject panel = (GameObject)Instantiate (panelPregabs);
 			GameObject button = (GameObject)Instantiate (imagePrefabs);
-			button.transform.SetParent (panel.transform, false);
-			panel.transform.SetParent (menuContent, false);
-		
 			button.AddComponent<DragMe> ();
+
+			panel.transform.SetParent (menuContent, false);
 
 			// carrega a imagem em uma textura2d e adiciona no botao
 			string pathTemp = @"file://" + elementsPath [i];
@@ -55,7 +54,15 @@ public class loadButtonArvore : MonoBehaviour
 
 			Image img = button.GetComponent<Image> ();
 			img.sprite = sprite;
-			
+
+			//img.rectTransform.sizeDelta = new Vector2 (100, 100);
+			img.transform.localPosition = new Vector3 (0, 0, 0);
+			img.rectTransform.anchorMin = new Vector2 (0, 0);
+			img.rectTransform.anchorMax = new Vector2 (1, 1);
+
+			button.transform.SetParent (panel.transform, false);
+
+
 //			but.onClick.AddListener ();
 
 		}
