@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.IO;
 
 public class loadImagensEdicao : MonoBehaviour
 {
@@ -15,8 +16,8 @@ public class loadImagensEdicao : MonoBehaviour
 		Image background = GameObject.Find ("background").GetComponent<Image> ();
 		Image imagem_a_editar = GameObject.Find ("imagem_a_editar").GetComponent<Image> ();
 
-		string bgPath = @"file://" + System.IO.Directory.GetCurrentDirectory () + @"\Imagens\ComEdicao\" + loadMenuButtons.imagemEDITAR + @"EDITADA.jpg";
-		string imgEditPath = @"file://" + System.IO.Directory.GetCurrentDirectory () + @"\Imagens\SemEdicao\" + loadMenuButtons.imagemEDITAR + @".jpg";
+		string bgPath = @"file://" + System.IO.Directory.GetCurrentDirectory () + @""+ Path.DirectorySeparatorChar +"Imagens"+Path.DirectorySeparatorChar+"ComEdicao"+Path.DirectorySeparatorChar + loadMenuButtons.imagemEDITAR + @"EDITADA.jpg";
+		string imgEditPath = @"file://" + System.IO.Directory.GetCurrentDirectory () + @""+Path.DirectorySeparatorChar+"Imagens"+Path.DirectorySeparatorChar+"SemEdicao"+Path.DirectorySeparatorChar + loadMenuButtons.imagemEDITAR + @".jpg";
 
 		background.overrideSprite = CarregarImagem (bgPath);
 		imagem_a_editar.overrideSprite = CarregarImagem (imgEditPath);

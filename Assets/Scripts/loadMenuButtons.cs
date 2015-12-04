@@ -28,7 +28,7 @@ public class loadMenuButtons : MonoBehaviour
 		
 		string path = System.IO.Directory.GetCurrentDirectory ();
 
-		path += @"\Imagens\SemEdicao";
+		path += @""+Path.DirectorySeparatorChar+"Imagens"+Path.DirectorySeparatorChar+"SemEdicao";
 		pathPrefix = @"file://";
 
 		imagesPath = Directory.GetFiles (path, "*.jpg");
