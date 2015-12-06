@@ -10,6 +10,7 @@ public class AreasApagaveis : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 	private Color highlightColor;
 	private Image image;
 	public GameObject imagem_a_editar;
+	public Toggle btn_apagar;
 
 	void Start ()
 	{
@@ -26,12 +27,14 @@ public class AreasApagaveis : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
 	public void OnPointerEnter (PointerEventData eventData)
 	{
-		image.color = highlightColor;
+		if (btn_apagar.isOn)
+			image.color = highlightColor;
 	}
 
 	public void OnPointerExit (PointerEventData eventData)
 	{
-		image.color = normalColor;
+		if (btn_apagar.isOn)
+			image.color = normalColor;
 	}
 
 	public void OnPointerDown (PointerEventData eventData)

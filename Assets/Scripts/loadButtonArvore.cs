@@ -31,7 +31,7 @@ public class loadButtonArvore : MonoBehaviour
 
 		// Carrega elementos para o menu do botao
 
-		string path = System.IO.Directory.GetCurrentDirectory () + @""+Path.DirectorySeparatorChar+"Imagens"+Path.DirectorySeparatorChar+"ComEdicao"+Path.DirectorySeparatorChar+ loadMenuButtons.imagemEDITAR + @"EDITADA"+Path.DirectorySeparatorChar;
+		string path = System.IO.Directory.GetCurrentDirectory () + @"" + Path.DirectorySeparatorChar + "Imagens" + Path.DirectorySeparatorChar + "ComEdicao" + Path.DirectorySeparatorChar + loadMenuButtons.imagemEDITAR + @"EDITADA" + Path.DirectorySeparatorChar;
 
 		elementsPath = Directory.GetFiles (path, "*");
 		elementsVector = new Texture2D[elementsPath.Length];

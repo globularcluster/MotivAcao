@@ -5,6 +5,8 @@ using System.IO;
 
 public class loadImagensEdicao : MonoBehaviour
 {
+	public Image background;
+	public Image imagem_a_editar;
 
 	// MODO DE USAR:
 	// Imagem sem ediçao em: /SemEdicao/<nomedaimagem>.jpg
@@ -13,14 +15,13 @@ public class loadImagensEdicao : MonoBehaviour
 
 	void Start ()
 	{
-		Image background = GameObject.Find ("background").GetComponent<Image> ();
-		Image imagem_a_editar = GameObject.Find ("imagem_a_editar").GetComponent<Image> ();
+		string bgPath, imgEditPath;
 
-		string bgPath = System.IO.Directory.GetCurrentDirectory () + @"" + Path.DirectorySeparatorChar + "Imagens" + Path.DirectorySeparatorChar + "ComEdicao" + Path.DirectorySeparatorChar + loadMenuButtons.imagemEDITAR + @"EDITADA.jpg";
-		string imgEditPath = System.IO.Directory.GetCurrentDirectory () + @"" + Path.DirectorySeparatorChar + "Imagens" + Path.DirectorySeparatorChar + "SemEdicao" + Path.DirectorySeparatorChar + loadMenuButtons.imagemEDITAR + @".jpg";
+		bgPath = System.IO.Directory.GetCurrentDirectory () + @"" + Path.DirectorySeparatorChar + "Imagens" + Path.DirectorySeparatorChar + "ComEdicao" + Path.DirectorySeparatorChar + loadMenuButtons.imagemEDITAR + @"EDITADA.jpg";
+		imgEditPath = System.IO.Directory.GetCurrentDirectory () + @"" + Path.DirectorySeparatorChar + "Imagens" + Path.DirectorySeparatorChar + "SemEdicao" + Path.DirectorySeparatorChar + loadMenuButtons.imagemEDITAR + @".png";
 
-		background.overrideSprite = CarregarImagem (bgPath);
-		imagem_a_editar.overrideSprite = CarregarImagem (imgEditPath);
+		background.sprite = CarregarImagem (bgPath);
+		imagem_a_editar.sprite = CarregarImagem (imgEditPath);
 //		imagem_a_editar.sprite.texture.Apply ();
 
 	}
@@ -34,21 +35,20 @@ public class loadImagensEdicao : MonoBehaviour
 	{
 		Texture2D texTmp = null;
 		byte[] fileData;
-		
+
 		if (File.Exists (path)) {
 			Debug.Log ("file exists");
 			fileData = File.ReadAllBytes (path);
 			texTmp = new Texture2D (1366, 768);
 			texTmp.LoadImage (fileData); //..this will auto-resize the texture dimensions.
-		}
 
 //		WWW www = new WWW (path);
 //		Texture2D texTmp = new Texture2D (1366, 768, TextureFormat.ARGB32, false);
 //		www.LoadImageIntoTexture (texTmp);
-		Sprite sprite = Sprite.Create (texTmp, new Rect (0, 0, texTmp.width, texTmp.height), new Vector2 (.5f, .5f));
 
-		return sprite;
+			Sprite sprite = Sprite.Create (texTmp, new Rect (0, 0, texTmp.width, texTmp.height), new Vector2 (.5f, .5f));
+			return sprite;
+		}
+		return null;
 	}
-	
 }
-
