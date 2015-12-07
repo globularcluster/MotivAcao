@@ -14,35 +14,30 @@ public class loadButtonArvore : MonoBehaviour
 	private Texture2D[] elementsVector;
 
 	public GameObject imagePrefabs;
-	public GameObject panelPregabs;
+	public GameObject panelPrefabs;
 
 	// Use this for initialization
 	void Start ()
 	{
-		openMenu = false;
-
-		b = this.GetComponent<Button> ();
-
-		b.onClick.AddListener (
-			() => {
-			openMenu = !openMenu;
-			Debug.Log (openMenu); }
-		);
-
 		// Carrega elementos para o menu do botao
-
 		string path = System.IO.Directory.GetCurrentDirectory () + @"" + Path.DirectorySeparatorChar + "Imagens" + Path.DirectorySeparatorChar + "ComEdicao" + Path.DirectorySeparatorChar + loadMenuButtons.imagemEDITAR + @"EDITADA" + Path.DirectorySeparatorChar;
 
-		elementsPath = Directory.GetFiles (path, "*");
+		try {
+			elementsPath = Directory.GetFiles (path, "*");
+		} catch (DirectoryNotFoundException d) {
+			// carregas imagens testes, para debug
+			Debug.Log (d.Message);
+			path = System.IO.Directory.GetCurrentDirectory () + @"" + Path.DirectorySeparatorChar + "Imagens" + Path.DirectorySeparatorChar 
+				+ "ComEdicao" + Path.DirectorySeparatorChar + @"testeEDITADA" + Path.DirectorySeparatorChar;
+			elementsPath = Directory.GetFiles (path, "*");
+		}
 		elementsVector = new Texture2D[elementsPath.Length];
 
 		for (int i=0; i<elementsPath.Length; i++) {
 
-			GameObject panel = (GameObject)Instantiate (panelPregabs);
+			GameObject panel = (GameObject)Instantiate (panelPrefabs, new Vector3 (120, 120), new Quaternion (0, 0, 0, 0));
 			GameObject button = (GameObject)Instantiate (imagePrefabs);
 			button.AddComponent<DragMe> ();
-
-			panel.transform.SetParent (menuContent, false);
 
 			// carrega a imagem em uma textura2d e adiciona no botao
 			string pathTemp = @"file://" + elementsPath [i];
@@ -55,15 +50,14 @@ public class loadButtonArvore : MonoBehaviour
 			Image img = button.GetComponent<Image> ();
 			img.sprite = sprite;
 
+			button.transform.SetParent (panel.transform, false);
 			//img.rectTransform.sizeDelta = new Vector2 (100, 100);
 			img.transform.localPosition = new Vector3 (0, 0, 0);
 			img.rectTransform.anchorMin = new Vector2 (0, 0);
 			img.rectTransform.anchorMax = new Vector2 (1, 1);
 
-			button.transform.SetParent (panel.transform, false);
+			panel.transform.SetParent (menuContent, false);
 
-
-//			but.onClick.AddListener ();
 
 		}
 
@@ -72,12 +66,6 @@ public class loadButtonArvore : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		menu.SetActive (openMenu);
 
-	}
-
-	public void CloseMenu ()
-	{
-		menu.SetActive (false);
 	}
 }

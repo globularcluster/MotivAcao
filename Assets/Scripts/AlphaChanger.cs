@@ -33,11 +33,14 @@ public class AlphaChanger : MonoBehaviour
 		image.sprite.texture.Apply ();
 	}
 	
-	public void ApagarArea (Vector3 vec, RectTransform rt)
+	public void ApagarArea (Transform tr, RectTransform rt)
 	{
-		Debug.Log ("ok");
-		Debug.Log (vec.x);
-		Debug.Log (rt.rect.width);
+		Camera camera = GameObject.Find ("Camera").GetComponent<Camera> ();
+		Vector3 screenPos = camera.WorldToScreenPoint (tr.position);
+
+		Debug.Log (screenPos.x);
+		Debug.Log ("width: " + rt.rect.width);
+		Debug.Log ("height: " + rt.rect.height);
 
 //		for (int i = (int) vec.x; i < (int)rt.rect.width; i++) {
 //			for (int j = (int) vec.y; j <(int)rt.rect.height; j++) {
@@ -45,8 +48,8 @@ public class AlphaChanger : MonoBehaviour
 //			}
 //		}
 
-		for (int i = 0; i < 400; i++) {
-			for (int j = 0; j < 500; j++) {
+		for (int i = (int)screenPos.x; i < rt.rect.width; i++) {
+			for (int j = (int)screenPos.y; j < rt.rect.height; j++) {
 				image.sprite.texture.SetPixel (i, j, new Color (255f, 255f, 255f, 0f));
 			}
 		}

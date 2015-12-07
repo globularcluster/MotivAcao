@@ -39,8 +39,8 @@ public class AreasApagaveis : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
 	public void OnPointerDown (PointerEventData eventData)
 	{
-		Vector3 position = this.transform.position;
+		Transform tr = GetComponent<Transform> ();
 		RectTransform retr = GetComponent<RectTransform> ();
-		imagem_a_editar.GetComponent<AlphaChanger> ().ApagarArea (position, retr);
+		imagem_a_editar.GetComponent<AlphaChanger> ().ApagarArea (tr, retr);
 	}
 }

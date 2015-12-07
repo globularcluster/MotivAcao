@@ -38,15 +38,13 @@ public class DragMe : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 		else
 			m_DraggingPlanes [eventData.pointerId] = canvas.transform as RectTransform;
 		
-		SetDraggedPosition (eventData);
-	
+		SetDraggedPosition (eventData);	
 	}
 
 	public void OnDrag (PointerEventData eventData)
 	{
 		if (m_DraggingIcons [eventData.pointerId] != null)
 			SetDraggedPosition (eventData);
-
 	}
 
 	private void SetDraggedPosition (PointerEventData eventData)
@@ -68,6 +66,10 @@ public class DragMe : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 			Destroy (m_DraggingIcons [eventData.pointerId]);
 
 		m_DraggingIcons [eventData.pointerId] = null;
+		
+		Toggle tgleArvore = GameObject.Find ("btn_arvore").GetComponent<Toggle> ();
+		tgleArvore.isOn = false;
+
 	}
 
 	static public T FindInParents<T> (GameObject go) where T : Component
