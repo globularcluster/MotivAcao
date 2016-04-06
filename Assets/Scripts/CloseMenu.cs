@@ -4,11 +4,18 @@ using System.Collections;
 
 public class CloseMenu : MonoBehaviour
 {
+    public GameObject menu;
+    private Toggle toggle;
 
-	public void CloseMenuView ()
-	{
-		Toggle toggle = GameObject.Find ("btn_arvore").GetComponent<Toggle> ();
-		gameObject.SetActive (toggle.isOn);
-	}
+    void Start()
+    {
+        toggle = gameObject.GetComponent<Toggle>();
+
+    }
+
+    public void CloseMenuView()
+    {
+        menu.SetActive(toggle.isOn);
+    }
 
 }

@@ -22,12 +22,14 @@ public class DropMe : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
 			return;
 
 		Sprite dropSprite = GetDropSprite (data);
-		if (dropSprite != null)
-			receivingImage.overrideSprite = dropSprite;
+//		if (dropSprite != null) 
+////			receivingImage.overrideSprite = dropSprite;
+//
+//			EraseDropSprite (data);
 
-		Color c = receivingImage.color;
-		c.a = 255;
-		receivingImage.color = c;
+//		Color c = receivingImage.color;
+//		c.a = 255;
+//		receivingImage.color = c;
 	}
 
 	public void OnPointerEnter (PointerEventData data)
@@ -63,5 +65,16 @@ public class DropMe : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointe
 			return null;
 		
 		return srcImage.sprite;
+	}
+
+	private void EraseDropSprite (PointerEventData data)
+	{
+		GameObject go = data.pointerDrag;
+
+		Color c = go.GetComponent<Image> ().color;
+		c.a = 0;
+		go.GetComponent<Image> ().color = c;
+
+//		go.SetActive (false);
 	}
 }

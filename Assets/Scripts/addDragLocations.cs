@@ -11,13 +11,13 @@ public class addDragLocations : MonoBehaviour
 	void Start ()
 	{
 		GameObject panel = (GameObject)Instantiate (panelPrefab);
-		panel.GetComponent<Image> ().rectTransform.sizeDelta = new Vector2 (150, 150);
+		panel.GetComponent<Image> ().rectTransform.sizeDelta = new Vector2 (250, 250);
 		panel.GetComponent<Image> ().transform.localPosition = new Vector3 (150, 150);
 
 		GameObject imageGO = (GameObject)Instantiate (imagePrefab);
 
 		Image image = imageGO.GetComponent<Image> ();
-		image.rectTransform.sizeDelta = new Vector2 (150, 150);
+		//image.rectTransform.sizeDelta = new Vector2 (150, 250);
 
 		image.transform.localPosition = new Vector3 (0, 0, 0);
 		image.rectTransform.anchorMin = new Vector2 (0, 0);

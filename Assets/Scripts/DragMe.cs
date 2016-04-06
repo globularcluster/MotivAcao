@@ -7,12 +7,26 @@ using UnityEngine.UI;
 public class DragMe : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
 	public bool dragOnSurfaces = true;
+	public GameObject button_apagar;
 	
 	private Dictionary<int,GameObject> m_DraggingIcons = new Dictionary<int, GameObject> ();
 	private Dictionary<int, RectTransform> m_DraggingPlanes = new Dictionary<int, RectTransform> ();
+	private Toggle toggle_apagar;
+
+	void Start ()
+	{
+		toggle_apagar = button_apagar.GetComponent<Toggle> ();
+	}
+
+	void Update ()
+	{
+	}
 
 	public void OnBeginDrag (PointerEventData eventData)
 	{
+		if (!toggle_apagar.isOn)
+			return;
+
 		var canvas = FindInParents<Canvas> (gameObject);
 		if (canvas == null)
 			return;
@@ -31,7 +45,7 @@ public class DragMe : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 		group.blocksRaycasts = false;
 
 		image.sprite = GetComponent<Image> ().sprite;
-		image.SetNativeSize ();
+//		image.SetNativeSize ();
 		
 		if (dragOnSurfaces)
 			m_DraggingPlanes [eventData.pointerId] = transform as RectTransform;
@@ -62,13 +76,17 @@ public class DragMe : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
 	public void OnEndDrag (PointerEventData eventData)
 	{
-		if (m_DraggingIcons [eventData.pointerId] != null)
+		if (m_DraggingIcons [eventData.pointerId] != null) 
 			Destroy (m_DraggingIcons [eventData.pointerId]);
 
+		// apaga imagem apenas se for solta em cima do botao apagar
+		GameObject[] gos = eventData.hovered.ToArray ();
+		foreach (GameObject g in gos) {
+			if (g == button_apagar)
+				gameObject.SetActive (false);
+		}
+
 		m_DraggingIcons [eventData.pointerId] = null;
-		
-		Toggle tgleArvore = GameObject.Find ("btn_arvore").GetComponent<Toggle> ();
-		tgleArvore.isOn = false;
 
 	}
 
