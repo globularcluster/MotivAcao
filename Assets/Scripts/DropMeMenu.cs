@@ -40,6 +40,8 @@ public class DropMeMenu : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
 		if (containerImage == null) 
 			return;
 
+        //Debug.Break();
+
 		var originalObj = data.pointerDrag;
 		if (originalObj != dragImage)
 			return;

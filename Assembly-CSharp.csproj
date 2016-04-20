@@ -45,22 +45,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AlphaInImage\Alpha.cs" />
      <Compile Include="Assets\ApagaLixo.cs" />
-     <Compile Include="Assets\Scripts\AlphaChanger.cs" />
-     <Compile Include="Assets\Scripts\AreasApagaveis.cs" />
      <Compile Include="Assets\Scripts\BotaoAjuda.cs" />
      <Compile Include="Assets\Scripts\CarregarCena.cs" />
+     <Compile Include="Assets\Scripts\ChangeLayerOrder.cs" />
      <Compile Include="Assets\Scripts\CloseMenu.cs" />
      <Compile Include="Assets\Scripts\DragMe.cs" />
      <Compile Include="Assets\Scripts\DragMeMenu.cs" />
      <Compile Include="Assets\Scripts\DropMe.cs" />
      <Compile Include="Assets\Scripts\DropMeMenu.cs" />
      <Compile Include="Assets\Scripts\ScreenShot.cs" />
-     <Compile Include="Assets\Scripts\addDragLocations.cs" />
-     <Compile Include="Assets\Scripts\loadButtonArvore.cs" />
-     <Compile Include="Assets\Scripts\loadImagensEdicao.cs" />
-     <Compile Include="Assets\Scripts\loadMenuButtons.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -3,8 +3,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Image))]
-public class DragMe : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+[RequireComponent (typeof(Image))]
+public class DragMe : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
 	public bool dragOnSurfaces = true;
 	public GameObject button_apagar;
@@ -12,20 +12,52 @@ public class DragMe : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 	private Dictionary<int,GameObject> m_DraggingIcons = new Dictionary<int, GameObject> ();
 	private Dictionary<int, RectTransform> m_DraggingPlanes = new Dictionary<int, RectTransform> ();
 	private Toggle toggle_apagar;
+	private Image imgLixo;
+	private Color normalColor;
+
+	public Color highlightColor = Color.red;
+
 
 	void Start ()
 	{
+		imgLixo = transform.parent.GetComponent<Image> ();
 		toggle_apagar = button_apagar.GetComponent<Toggle> ();
+
+		normalColor = imgLixo.color;
 	}
 
-	void Update ()
-	{
-	}
+	#region IPointerEnterHandler implementation
 
-	public void OnBeginDrag (PointerEventData eventData)
+	public void OnPointerEnter (PointerEventData eventData)
 	{
 		if (!toggle_apagar.isOn)
 			return;
+		
+		imgLixo.color = highlightColor;
+	}
+
+	#endregion
+
+	#region IPointerExitHandler implementation
+
+	public void OnPointerExit (PointerEventData eventData)
+	{
+		imgLixo.color = normalColor;
+	}
+
+	#endregion
+
+	public void OnBeginDrag (PointerEventData eventData)
+	{
+		try {
+			if (!toggle_apagar.isOn)
+				return;
+
+			Debug.Log (eventData.pointerDrag.ToString ());
+				
+		} catch (System.Exception e) {
+			Debug.Log (e.ToString ());
+		}
 
 		var canvas = FindInParents<Canvas> (gameObject);
 		if (canvas == null)
@@ -44,7 +76,7 @@ public class DragMe : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 		var group = m_DraggingIcons [eventData.pointerId].AddComponent<CanvasGroup> ();
 		group.blocksRaycasts = false;
 
-		image.sprite = GetComponent<Image> ().sprite;
+		image.sprite = imgLixo.sprite;
 //		image.SetNativeSize ();
 		
 		if (dragOnSurfaces)
@@ -76,14 +108,14 @@ public class DragMe : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
 	public void OnEndDrag (PointerEventData eventData)
 	{
-		if (m_DraggingIcons [eventData.pointerId] != null) 
+		if (m_DraggingIcons [eventData.pointerId] != null)
 			Destroy (m_DraggingIcons [eventData.pointerId]);
 
 		// apaga imagem apenas se for solta em cima do botao apagar
 		GameObject[] gos = eventData.hovered.ToArray ();
 		foreach (GameObject g in gos) {
 			if (g == button_apagar)
-				gameObject.SetActive (false);
+				gameObject.transform.parent.gameObject.SetActive (false);
 		}
 
 		m_DraggingIcons [eventData.pointerId] = null;
